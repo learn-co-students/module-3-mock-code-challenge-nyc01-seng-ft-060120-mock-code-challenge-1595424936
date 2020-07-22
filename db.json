@@ -2,8 +2,8 @@
   "dogs": [
     {
       "id": 1,
-      "name": "Babee",
-      "breed": "Beagle",
+      "name": "Baby",
+      "breed": "Dachshund",
       "sex": "male"
     },
     {
@@ -15,7 +15,7 @@
     {
       "id": 3,
       "name": "Snickers",
-      "breed": "Dachshund",
+      "breed": "Irish Spaniel",
       "sex": "female"
     },
     {
@@ -34,7 +34,7 @@
       "id": 6,
       "name": "Oreo",
       "breed": "English Springer",
-      "sex": "male"
+      "sex": "female"
     },
     {
       "id": 7,

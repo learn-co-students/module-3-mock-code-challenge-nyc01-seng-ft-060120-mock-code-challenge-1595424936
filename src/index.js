@@ -53,11 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const inputSex = form.children[2]
             const dogId = inputName.dataset.dogId
             
-            
+            // console.log(e.target)
             if (dogId){
 
-                if (inputName.value === "" || inputBreed.value === "" || inputSex.value === ""   ){
-                    alert("Please fill out all fields")
+                if (inputName.value === "" || inputBreed.value === "" || inputSex.value === ""){
+                    alert("Please fill out all fields.")
                     return
                 } else {
 
@@ -77,15 +77,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     
                     fetchDogs();
                     resetForm(form);
-                }   
+                    console.log("after resetForm", form)
+               }   
             }else{
-                alert("To use this form, please select a dog from the table below first")
+                alert("To use this form, please select a dog from the table below first.")
             }
         })
     }
 
     function resetForm(form){
         form.reset()
+        let inputName = form.children[0]
+        let dogId = inputName.attributes[4]
+        console.dir("dogID", dogId)
+        console.log("in reset form", form)
     }
 
     
