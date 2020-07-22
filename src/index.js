@@ -5,12 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputBreed = document.querySelector('[name="breed"]')
     const inputSex = document.querySelector('[name="sex"]')
    
-
-
+    
     function fetchDogs(){
         fetch(dogUrl)
         .then( resp => resp.json() )
-        .then( dogs => renderAllDogs(dogs))
+        .then( dogs => {
+            tableBody.innerHTML = ''
+            renderAllDogs(dogs)})
     }
 
     function renderAllDogs(dogs){
