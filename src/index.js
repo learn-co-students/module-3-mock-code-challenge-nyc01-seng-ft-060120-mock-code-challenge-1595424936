@@ -35,23 +35,36 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.className === "edit") {
             const editButton = e.target
             let id = editButton.id
+
             
-            console.log(form)
+            // console.log(form)
             let formData = {
-                name: form.name.value,
-                breed: form.breed.value,
-                sex: form.sex.value
+                name: editButton.name,
+                breed: editButton.breed,
+                sex: editButton.sex
             }
+           
             
             fetch(`${baseURL}/${id}`, {
-                method: "patch",
+                method: "PATCH",
                 headers: {
                     "content-type": "application/json",
                     "accept": "application/json"
                 },
                 body: JSON.stringify (formData)
             })
-            // .then?
+            .then(function(response) {
+                return response.json()
+            })
+            .then(function(dog) {
+                renderForm(dog)
+            })
+
+            function renderForm(dog) {
+                form.name.value = dog.name
+                form.breed.value = dog.breed
+                form.sex.value = dog.sex
+            }
 
 
 
