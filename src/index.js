@@ -13,12 +13,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function fetchDogs(){
         fetch(baseUrl)
         .then(response => response.json())
-        .then(dogs => {renderDog(dogs), allDogs.push(dogs)})
+        .then(dogs => {renderDogs(dogs), allDogs = dogs })
     }
 
 
-    function renderDog(dogs){
+    function renderDogs(dogs){
         dogs.forEach(dog =>{
+            renderDog(dog)
+        })
+
+    }
+
+    function renderDog(dog){
             const dogTr = document.createElement('tr')
             dogTr.dataset.id = dog.id
             const editButton = document.createElement('button')
@@ -27,8 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
             dogTr.innerHTML = `<td>${dog.name}</td> <td>*${dog.breed}*</td> <td>*${dog.sex}*</td>` 
             dogTr.append(editButton)
             tableBody.append(dogTr)
-        })
-
     }
 
     function editEventListener(){
@@ -38,9 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // let matchDog = allDogs.forEach(dog => dog.id === e.target.dataset.id)
 
-                dogForm.firstElementChild.textContent = e.target.parentNode.firstElementChild.textContent
-                dogForm.childNodes[3].textContent = e.target.parentNode.childNodes[2].textContent
-                dogForm.childNodes[5].textContent = e.target.parentNode.childNodes[4].textContent
+                dogForm.name.value = e.target.parentNode.children[0].textContent
+                dogForm.breed.value = e.target.parentNode.children[1].textContent
+                dogForm.sex.value = e.target.parentNode.children[2].textContent
+                
+                dogForm.dataset.id = e.target.dataset.id
 
 
                 // dogForm.secondChild.name = e.target.parentNode.secondElementChild.innerText
@@ -65,8 +71,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function dogFormListener(){
         dogForm.addEventListener("submit", function(e){
-            // e.preventDefault()
-            updateDog(e, allDogs.find(dog => {dog.name === dogForm.firstElementChild.textContent}))       
+            e.preventDefault()
+            const name = dogForm.name.value
+            const breed = dogForm.breed.value
+            const sex = dogForm.sex.value
+
+            const body = {name, breed, sex}
+            const id = dogForm.dataset.id
+            console.log(dogForm.dataset.id)
+            updateDog(id, body)
+    
+            
             // dogToFind;
             //breeds.filter(breed => {breed.startsWith(letter)})
             // console.log(dogToFind)
@@ -74,19 +89,14 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
-    function updateDog(e, dog){
-        e.preventDefault()
-        fetch(`http://localhost:3000/dogs/${dog.id}`, {
+    function updateDog(id, body){
+        fetch(`http://localhost:3000/dogs/${id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
                 'Accept': "application/json"
             },
-            body: JSON.stringify({
-                name: dog.name,
-                breed: dog.breed,
-                sex: dog.sex
-            })
+            body: JSON.stringify(body)
         })
         .then(res => res.json())
         .then(dog => fetchDogs(dog))
@@ -96,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     fetchDogs()
-    console.log(allDogs)
+    
 
 
 })
