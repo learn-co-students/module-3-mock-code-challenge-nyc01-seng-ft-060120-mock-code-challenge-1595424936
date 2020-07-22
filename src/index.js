@@ -28,8 +28,14 @@ const renderDog = (dogObject) =>
     sex.innerText = dogObject.sex
     sex.classList.add('name')
 
+    const edit = document.createElement('td')
+    const button = document.createElement('button')
+    button.innerText = 'Edit'
+    button.dataset.id = dogObject.id
 
-    row.append(name, breed, sex)
+
+    edit.append(button)
+    row.append(name, breed, sex, button)
     table.append(row)
 
 
