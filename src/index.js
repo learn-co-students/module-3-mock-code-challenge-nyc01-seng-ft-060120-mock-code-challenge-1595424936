@@ -49,8 +49,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const breed = dataTableRows[1]
                 const sex = dataTableRows[2]
 
+                dogForm.name.value = name.innerHTML
+                dogForm.breed.value = breed.innerHTML
+                dogForm.sex.value = sex.innerHTML
+
+                console.log(name.innerHTMl)
                 
-                console.log(dogForm.name)
+                
             }
             
 
