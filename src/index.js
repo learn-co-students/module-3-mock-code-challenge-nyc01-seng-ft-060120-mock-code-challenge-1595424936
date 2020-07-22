@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
         `<td>${dog.name}</td>
         <td>${dog.breed}</td>
         <td>${dog.sex}</td>
-        <td><button id='edit'>Edit Dog</button></td>
+        <td><button class='edit' id= ${dog.id}>Edit Dog</button></td>
         `
         dogTable.append(dogRow)
 
-        dogRow.addEventListener('click', dogClick)
+        dogRow.addEventListener('click', updateDog)
         
     }
 
@@ -28,7 +28,17 @@ document.addEventListener('DOMContentLoaded', () => {
     //     renderSingleDog(e.target.id)
     // }
 
-    function renderSingleDog(id){
+    function updateDog(url, dog){
+        fetch (url, {
+            method: 'PATCH',
+            headers: {
+                'Content-type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                "name": ''
+            })
+        })
         
     }
 
