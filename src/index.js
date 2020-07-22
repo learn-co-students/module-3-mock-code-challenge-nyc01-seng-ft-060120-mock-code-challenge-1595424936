@@ -8,11 +8,19 @@ const dogsUrl = 'http://localhost:3000/dogs/'
 const fetchDogs = () => {
   fetch(dogsUrl)
   .then(resp => resp.json())
-  .then(dogs => loadDogs(dogs))
+  .then(data => {
+    loadDogs(data)
+  })
 }
 
 const loadDogs =(dogs) => {
+  clearForm()
   dogs.forEach(dog => renderDog(dog))
+}
+
+const clearForm = () => {
+  const dogTable = document.querySelector("#table-body");
+  dogTable.innerHTML = ''
 }
 
 const renderDog = (dog) => {
@@ -29,7 +37,6 @@ const renderDog = (dog) => {
   sexCell.innerHTML = `${dog.sex}`
   editBtn.innerHTML = 'Edit Dog'
   editCell.appendChild(editBtn)
-  
   editBtnHandler(editBtn, dog)
 }
 
@@ -39,7 +46,7 @@ const editBtnHandler = (button, dog) => {
   })
 }
 const displayDog = (dog) => {
-  const dogForm = document.getElementById('dog-form');
+  const dogForm = document.getElementById("dog-form");
   const submitBtn = dogForm.submit
   dogForm.name.value = dog.name
   dogForm.breed.value = dog.breed
@@ -55,20 +62,13 @@ const submitHandler = (submitBtn, dog) => {
 }
 
 const updateDog = (dog) => {
-  const dogForm = document.getElementById('dog-form');
+  const dogForm = document.getElementById("dog-form");
   dog.name = dogForm.name.value 
   dog.breed = dogForm.breed.value
   dog.sex = dogForm.sex.value
   submitDog(dog)
+  
 }
-
-const updateDogRow = (dog) => {
-  const dogRow = document.querySelector(`[data-dog-id='${dog.id}']`)
-  dogRow.children[0].innerHTML = dog.name
-  dogRow.children[1].innerHTML = dog.breed
-  dogRow.children[2].innerHTML = dog.sex
-}
-
 
 const submitDog = (dog) => {
   fetch(dogsUrl + `${dog.id}`, {
@@ -80,7 +80,7 @@ const submitDog = (dog) => {
     body: JSON.stringify(dog),
   })
   .then((resp) => resp.json())
-  .then((dog) => updateDogRow(dog));
+  fetchDogs();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
