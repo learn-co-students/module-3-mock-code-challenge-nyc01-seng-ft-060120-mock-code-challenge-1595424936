@@ -24,7 +24,7 @@ const renderDog = (dog) => {
     const buttonTD = document.createElement('td');
     const button = document.createElement('button');
     //deal with button
-    button.innerText = 'Edit';
+    button.innerText = 'Edit Dog';
     button.id = dog.id; //this is for later
     buttonTD.appendChild(button);
     //deal with attributes
@@ -69,7 +69,6 @@ const editDoggo = (target) => {
         }
         submitDoggo(id, doggo)
         //form.reset();
-        
     })
 }
 
@@ -94,4 +93,5 @@ const submitDoggo = (id, doggo) => {
 const main = () => {
     getDogs();
 }
+
 document.addEventListener('DOMContentLoaded', main)
