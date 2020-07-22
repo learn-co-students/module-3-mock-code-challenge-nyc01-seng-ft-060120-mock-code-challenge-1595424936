@@ -19,8 +19,21 @@ document.addEventListener('DOMContentLoaded', () => {
         <td><button id='edit'>Edit Dog</button></td>
         `
         dogTable.append(dogRow)
+
+        dogRow.addEventListener('click', dogClick)
         
     }
+
+    // function dogClick(e){
+    //     renderSingleDog(e.target.id)
+    // }
+
+    function renderSingleDog(id){
+        
+    }
+
+
+
 
     fetchDogs()
 
