@@ -67,13 +67,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         sex: inputSex.value
                     })
                 })
-               
+                
                 fetchDogs();
+                resetForm(form);
 
             }else{
                 alert("To use this form, please select a dog from the table below first")
             }
         })
+    }
+
+    function resetForm(form){
+        form.reset()
     }
 
     
