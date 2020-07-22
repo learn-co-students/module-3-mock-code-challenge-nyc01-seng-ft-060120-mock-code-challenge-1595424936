@@ -7,10 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
    
 
 
-    // console.log(tableBody)
-    
-
-
     function fetchDogs(){
         fetch(dogUrl)
         .then( resp => resp.json() )
@@ -23,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderDog(dog){
         let tableRow = document.createElement('tr')
+        tableRow.innerHTML =''
         tableRow.innerHTML = `
         <td>${dog.name}</td>
         <td>${dog.breed}</td>
@@ -41,17 +38,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 inputSex.value = dog.sex
             }
         })
-
-    
     }
 
 
     function changeDogInfo(){
+        
         document.addEventListener('submit', (e) =>{
             e.preventDefault()
-            console.log(e.target)
+          
+            const form = e.target
+            const inputName = form.children[0]
+            const inputBreed = form.children[1]
+            const inputSex = form.children[2]
+            const dogId = inputName.dataset.dogId
             
-            // fetch()
+            
+            if (dogId){
+                fetch(dogUrl + dogId, {
+                    method: "PATCH",
+                    headers: {
+                        "content-type" : "application/json",
+                        "accept": "application/json"
+                    },
+                    body: JSON.stringify({
+                        name: inputName.value,
+                        breed: inputBreed.value,
+                        sex: inputSex.value
+                    })
+                })
+               
+                fetchDogs();
+
+            }else{
+                alert("To use this form, please select a dog from the table below first")
+            }
         })
     }
 
