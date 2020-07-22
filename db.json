@@ -2,13 +2,13 @@
   "dogs": [
     {
       "id": 1,
-      "name": "Babeeee",
+      "name": "Babe",
       "breed": "Scottish Deerhound",
       "sex": "male"
     },
     {
       "id": 2,
-      "name": "Teddyyyyy",
+      "name": "Teddy",
       "breed": "Rhodesian Ridgeback",
       "sex": "female"
     },
@@ -32,13 +32,13 @@
     },
     {
       "id": 6,
-      "name": "Oreooooo",
+      "name": "Oreo",
       "breed": "English Springer",
       "sex": "male"
     },
     {
       "id": 7,
-      "name": "Diamond",
+      "name": "Diamond-Daisy",
       "breed": "Labrador",
       "sex": "female"
     },
@@ -110,7 +110,7 @@
     },
     {
       "id": 19,
-      "name": "Penny",
+      "name": "Penny Lane",
       "breed": "Wheaten Terrier",
       "sex": "male"
     },
