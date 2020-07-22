@@ -63,8 +63,10 @@ const updateDog = (dog) => {
 }
 
 const updateDogRow = (dog) => {
-  const dogTable = document.querySelector("#table-body");
-  dogTable.querySelector('[data-dog-id=`${dog.id}`]')
+  const dogRow = document.querySelector(`[data-dog-id='${dog.id}']`)
+  dogRow.children[0].innerHTML = dog.name
+  dogRow.children[1].innerHTML = dog.breed
+  dogRow.children[2].innerHTML = dog.sex
 }
 
 
@@ -80,10 +82,6 @@ const submitDog = (dog) => {
   .then((resp) => resp.json())
   .then((dog) => updateDogRow(dog));
 }
-
-
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
   fetchDogs()
