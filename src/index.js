@@ -3,11 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let dogsTable = document.getElementById("table-body")
     let dogForm = document.getElementById("dog-form")
     
-  
-   
-    
-    //console.log(editButton)
-
     function fetchDogs(url){
         fetch(url)
         .then(resp => resp.json())
@@ -43,8 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 dogForm.name.value = dogName.innerHTML
                 dogForm.breed.value = dogBreed.innerHTML
                 dogForm.sex.value = dogSex.innerHTML
-            }
-             
+            }    
         })
     }
 
@@ -54,7 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
-   
     function editDog(url,dog){
         fetch(`${url}/${id}`, {
             method:"PATCH",
@@ -64,23 +57,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 dog: "dog"
             })
         })
-
-        dogForm.addEventListener("submit", function(e){
-            e.preventDefault()
-            const newDog = {
-                name: e.target.name.value , 
-                breed:  e.target.breed.value , 
-                sex: e.target.sex.value 
-            }
-            console.log(e.target.name.value)
-        editDog(dogsUrl, newDog)  //need to add id depending on the dog clicked
-        })
     }
+
+    dogForm.addEventListener("submit", function(e){
+        e.preventDefault()
+        const newDog = {
+            name: e.target.name.value , 
+            breed:  e.target.breed.value , 
+            sex: e.target.sex.value 
+        }
+            // console.log(e.target.name.value)
+        editDog(`dogsUrl/${id}`, newDog)  //need to add id depending on the dog clicked
+        })
+    
   
 
     /*
-
-
         - On submit of the form, a PATCH request should be 
         made to http://localhost:3000/dogs/:id to update 
         the dog information (including name, breed and 
