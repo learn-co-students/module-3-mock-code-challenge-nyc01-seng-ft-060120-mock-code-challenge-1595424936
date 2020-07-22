@@ -28,8 +28,24 @@ document.addEventListener('DOMContentLoaded', () => {
       },
       body: JSON.stringify(dog)
     })
+    .then(resp => resp.json())
     .then(fetchDogs)
   }
+
+  // EVENT HANDLERS
+  function submitEvent(){
+    dogForm.addEventListener("submit", function(e){
+      e.preventDefault()
+      const name = e.target[0].value
+      const breed = e.target[1].value
+      const sex = e.target[2].value
+      const dogId = e.target.dataset.id
+      const newDog = {name, breed, sex}
+      updateDog(newDog, dogId)
+      e.target.reset()
+    })
+  }
+
 
   // FUNCTIONS
   function renderDogs(dogs){
@@ -51,25 +67,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderOneDog(dog){
+    dogForm.dataset.id = dog.id
     let dogFormName = dogForm[0]
     let dogFormBreed = dogForm[1]
     let dogFormSex = dogForm[2]
     dogFormName.value = dog.name
     dogFormBreed.value = dog.breed
     dogFormSex.value = dog.sex
-    dogForm.addEventListener("submit", function(e){
-      e.preventDefault()
-      const newDogForm = e.target
-      const name = e.target[0].value
-      const breed = e.target[1].value
-      const sex = e.target[2].value
-      const dogId = dog.id
-      const newDog = {name, breed, sex}
-      newDogForm.reset()
-      updateDog(newDog, dogId)
-    })
   }
 
   // EXECUTIONS
   fetchDogs()
+  submitEvent()
 })
