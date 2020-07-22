@@ -40,9 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
         dogsTable.addEventListener("click", function(e){
             e.preventDefault()
             if (e.target.className === "edit-button"){
-                dogForm.name.value = dogName
-                dogForm.breed.value = dogBreed
-                dogForm.sex.value = dogSex
+                dogForm.name.value = dogName.innerHTML
+                dogForm.breed.value = dogBreed.innerHTML
+                dogForm.sex.value = dogSex.innerHTML
             }
              
         })
@@ -80,9 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /*
 
-    - Make a dog editable. Clicking on the edit button next 
-    to a dog should populate the top form with that dog's 
-    current information.
 
         - On submit of the form, a PATCH request should be 
         made to http://localhost:3000/dogs/:id to update 
