@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
    const dogForm = document.getElementById('dog-form')
     
     function fetchDogs() {
+        dogTable.innerHTML = ""
         fetch(baseUrl)
         .then(res => res.json())
         .then(dogs => getIndividualDogs(dogs))
@@ -71,16 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(res => res.json())
             .then(dog => console.log(dog))
-            .then(fetchDogsAgain())
+            .then(success => fetchDogs())
             
         })
-    }
-
-    function fetchDogsAgain() {
-        dogTable.innerHTML = ""
-        fetch(baseUrl)
-        .then(res => res.json())
-        .then(dogs => getIndividualDogs(dogs))
     }
 
     fetchDogs()
