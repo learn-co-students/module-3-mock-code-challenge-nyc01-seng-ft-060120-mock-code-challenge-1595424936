@@ -6,6 +6,8 @@ const getDogs = () => {
     .then(response => response.json())
     .then(dogs => {
         console.log(dogs);
+        //clear the table if anything in it
+        document.getElementById('table-body').innerHTML = '';
         dogs.forEach(dog => {
             renderDog(dog);
         });
@@ -41,9 +43,52 @@ const editButtonListener = () => {
     const buttons = document.querySelectorAll('button');
     buttons.forEach(button => {
         button.addEventListener('click', (e) => {
-            
+            editDoggo(e.target);
         })
     });
+}
+
+const editDoggo = (target) => {
+    const id = target.id;
+    const form = document.getElementById('dog-form');
+    const row = target.parentNode.parentNode;
+    console.log(row)
+    //get everything but the buttons from the form and the row
+    const inputs = form.children;
+    const values = row.children;
+    for (i = 0; i < inputs.length-1; i++){
+        inputs[i].value = values[i].innerText;
+    }
+    console.log(form.lastElementChild)
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        doggo = {
+            name: inputs[0].value,
+            breed: inputs[1].value,
+            sex: inputs[2].value
+        }
+        submitDoggo(id, doggo)
+        //form.reset();
+        
+    })
+}
+
+const submitDoggo = (id, doggo) => {
+    const url = URL_BASE+id
+    fetch(url, {
+        method: 'PATCH',
+        headers: { 
+            'Content-type':'application/json',
+            Accept:'application/json'
+        },
+        body: JSON.stringify(doggo)
+    })
+    .then(response => response.json())
+    .then(dog => {
+        console.log(dog);
+        document.getElementById('dog-form').reset();
+        getDogs();
+    })
 }
 
 const main = () => {
