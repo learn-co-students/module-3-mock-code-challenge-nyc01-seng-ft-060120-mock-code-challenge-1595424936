@@ -10,35 +10,32 @@ const fetchDogs = () => {
     })
 }
 
-const renderDog = (dogObject) => {
-    const row = document.createElement('trow')
-    row.id = dogObject.id
-    row.innerHTML = `
+const renderDog = (dogObject) =>
+ {
+    const table = document.querySelector('#table-body')
+    const row = document.createElement('tr')
+    row.dataset.id = dogObject.id
 
-      <td>${dogObject.name}</td> 
-      <td>${dogObject.breed}</td> 
-      <td>${dogObject.sex}</td> 
-      <td>
-      <button>Edit</button>
-      </td>
+    const name = document.createElement('td')
+    name.innerText = dogObject.name
+    name.classList.add('name')
 
-    `
+    const breed = document.createElement('td')
+    breed.innerText = dogObject.breed
+    breed.classList.add('breed')
 
-    // const td1 = document.createElement('td')
-    // const td2 = document.createElement('td')
-    // const td3 = document.createElement('td')
-    // td1.innerText = `${dogObject.name}`
-    // td2.innerText = `${dogObject.breed}`
-    // td3.innerText = `${dogObject.sex}`
+    const sex = document.createElement('td')
+    sex.innerText = dogObject.sex
+    sex.classList.add('name')
 
-    // row.appendChild(td1)
-    // row.appendChild(td2)
-    // row.appendChild(td3)
 
-    document.getElementById('table-body').appendChild(row)
+    row.append(name, breed, sex)
+    table.append(row)
+
+
+
 }
-
-// const renderDogs = 
+    
 
 
 
