@@ -8,13 +8,13 @@
     },
     {
       "id": 2,
-      "name": "",
-      "breed": "",
-      "sex": ""
+      "name": "London",
+      "breed": "Mutt",
+      "sex": "male"
     },
     {
       "id": 3,
-      "name": "",
+      "name": "Gracie",
       "breed": "Dachshund",
       "sex": "female"
     },
@@ -38,13 +38,13 @@
     },
     {
       "id": 7,
-      "name": "Diamond",
+      "name": "",
       "breed": "Labrador",
       "sex": "female"
     },
     {
       "id": 8,
-      "name": "Chloe",
+      "name": "",
       "breed": "Dandie Terrier",
       "sex": "male"
     },
@@ -52,17 +52,17 @@
       "id": 9,
       "name": "Shelby",
       "breed": "Kuvasz",
-      "sex": "male"
+      "sex": "female"
     },
     {
       "id": 10,
       "name": "Patches",
-      "breed": "Dingo",
+      "breed": "Dalmation",
       "sex": "male"
     },
     {
       "id": 11,
-      "name": "Jasper",
+      "name": "",
       "breed": "Redbone",
       "sex": "female"
     },
@@ -98,7 +98,7 @@
     },
     {
       "id": 17,
-      "name": "Chance",
+      "name": "",
       "breed": "Flatcoated Retriever",
       "sex": "female"
     },
@@ -116,9 +116,9 @@
     },
     {
       "id": 20,
-      "name": "Coco",
-      "breed": "Affenpinscher",
-      "sex": "female"
+      "name": "London",
+      "breed": "Mutt",
+      "sex": "male"
     }
   ]
 }

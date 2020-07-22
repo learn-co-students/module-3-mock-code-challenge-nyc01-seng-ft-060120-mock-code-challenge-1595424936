@@ -23,58 +23,68 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderDog(dog) {
         let dogRow = table.insertRow()
         dogRow.innerHTML = `
-        <td>${dog.name}</td> 
-        <td>${dog.breed}</td> 
-        <td>${dog.sex}</td> 
-        <td><button id=${dog.id} class="edit">Edit</button></td></tr>`
-              
+        <td id="name">${dog.name}</td> 
+        <td id="breed">${dog.breed}</td> 
+        <td id="sex">${dog.sex}</td> 
+        <td><button id=${dog.id} class="edit">Edit</button></td></tr>`          
     }
-
-
-    document.addEventListener('click', function(e) {
-        if (e.target.className === "edit") {
-            const editButton = e.target
-            let id = editButton.id
-
-            
-            // console.log(form)
-            let formData = {
-                name: editButton.name,
-                breed: editButton.breed,
-                sex: editButton.sex
-            }
-           
-            
-            fetch(`${baseURL}/${id}`, {
-                method: "PATCH",
-                headers: {
-                    "content-type": "application/json",
-                    "accept": "application/json"
-                },
-                body: JSON.stringify (formData)
-            })
-            .then(function(response) {
-                return response.json()
-            })
-            .then(function(dog) {
-                renderForm(dog)
-            })
-
-            function renderForm(dog) {
-                form.name.value = dog.name
-                form.breed.value = dog.breed
-                form.sex.value = dog.sex
-            }
-
-
-
-        } // first if statement
-    })
     
+        
+            document.addEventListener('click', function(e) {
+                if (e.target.className === 'edit') {
+                    const editButton = e.target
+                    // console.log(editButton)
+                    let dogId = editButton.id
+                    // console.log(dogId)
+                    let row = editButton.parentElement.parentElement
+                    // console.log(row)
+                    let name = row.querySelector('#name')
+                    // console.log(name)
+                    let breed = row.querySelector('#breed')
+                    // console.log(breed)
+                    let sex = row.querySelector('#sex')
+                    // console.log(sex)
+                    form.name.value = name.innerText
+                    form.breed.value = breed.innerText
+                    form.sex.value = sex.innerText
+                    submitForm(dogId)
 
+          
+                    
+                } // if statement end
+            }) // editButton event listener end
 
+            function submitForm(dogId) {
 
+            form.addEventListener('submit', function(e) {
+                e.preventDefault()
 
+                let formData = {
+                    name: form.name.value,
+                    breed: form.breed.value,
+                    sex: form.sex.value
+                }
+
+                fetch(`${baseURL}/${dogId}`, {
+                    method: "PATCH",
+                    headers: {
+                        "content-type": "application/json",
+                        "accept": "application/json"
+                    },
+                    body: JSON.stringify (formData)
+                })
+                .then(function(response) {
+                    return response.json()
+                })
+                .then(function(dog) {
+                    fetchDogs(dog)
+                })
     
+                
+            }) // end of submit form event listener
+        } // end of submit form function
+
+                
+submitForm()   
 fetchDogs()
 }) // end of DOM content loaded
