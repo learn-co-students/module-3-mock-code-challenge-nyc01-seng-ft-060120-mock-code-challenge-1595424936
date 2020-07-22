@@ -55,22 +55,29 @@ document.addEventListener('DOMContentLoaded', () => {
             
             
             if (dogId){
-                fetch(dogUrl + dogId, {
-                    method: "PATCH",
-                    headers: {
-                        "content-type" : "application/json",
-                        "accept": "application/json"
-                    },
-                    body: JSON.stringify({
-                        name: inputName.value,
-                        breed: inputBreed.value,
-                        sex: inputSex.value
-                    })
-                })
-                
-                fetchDogs();
-                resetForm(form);
 
+                if (inputName.value === "" || inputBreed.value === "" || inputSex.value === ""   ){
+                    alert("Please fill out all fields")
+                    return
+                } else {
+
+                    ///
+                    fetch(dogUrl + dogId, {
+                        method: "PATCH",
+                        headers: {
+                            "content-type" : "application/json",
+                            "accept": "application/json"
+                        },
+                        body: JSON.stringify({
+                            name: inputName.value,
+                            breed: inputBreed.value,
+                            sex: inputSex.value
+                        })
+                    })
+                    
+                    fetchDogs();
+                    resetForm(form);
+                }   
             }else{
                 alert("To use this form, please select a dog from the table below first")
             }
