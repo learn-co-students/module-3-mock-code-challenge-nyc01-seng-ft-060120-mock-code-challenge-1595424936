@@ -39,7 +39,14 @@ const renderDog = (dogObject) =>
     table.append(row)
 
 
+}
 
+document.addEventListener('click', (e) => {
+    console.log(e.target)
+})
+
+const getDog = (id) => {
+    fetch('http://localhost:3000/dogs/dogs.id')
 }
     
 
@@ -59,5 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // √ get the url
 // √ make the fetch request to that url
-// create render function
-// add it to the dom
+// √create render function
+// √add it to the dom
+// √get edit button
+// get individual dog when edit is clicked
